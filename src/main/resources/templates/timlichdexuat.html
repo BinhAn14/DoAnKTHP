@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Đề xuất lịch giảng dạy</title>
+</head>
+<body>
+    <h2>Nhập thông tin lớp và giảng viên</h2>
+    <form action="/dexuat-lich" method="post">
+        <label for="tenLop">Tên lớp:</label>
+        <input type="text" id="tenLop" name="tenLop" required><br>
+
+        <label for="giangVienId">Tên giảng viên:</label>
+        <input type="text" id="giangVienId" name="giangVienId" required><br>
+
+        <button type="submit">Xem lịch đề xuất</button>
+    </form>
+
+    <div id="ketQuaLich">
+    </div>
+</body>
+</html>
