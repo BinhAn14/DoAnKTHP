@@ -10,4 +10,5 @@ import java.util.Optional;
 @Repository
 public interface LopHocRepository extends JpaRepository<LopHoc, Long> {
     Optional<LopHoc> findByTenLop(String tenLop);
+    
 }

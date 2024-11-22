@@ -1,10 +1,12 @@
 package com.example.DoAnKTHP.models;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "PhongHoc")
 public class PhongHoc {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -12,17 +14,34 @@ public class PhongHoc {
     @Column(name = "ten_phong", nullable = false, length = 100)
     private String tenPhong;
 
-    @Column(name = "created_at", nullable = false, length = 19)
-    private String createdAt;
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
 
-    @Column(name = "updated_at", length = 19)
-    private String updatedAt;
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
 
     @Column(name = "created_by_user_id", nullable = false)
     private Long createdByUserId;
 
     @Column(name = "updated_by_user_id")
     private Long updatedByUserId;
+
+    // Getter and Setter methods
+
+    @PrePersist
+    public void prePersist() {
+        LocalDateTime now = LocalDateTime.now();
+        this.createdAt = now;  // Gán thời gian tạo
+        this.updatedAt = now;  // Gán thời gian cập nhật
+        this.createdByUserId = currentUserId();  // Giả sử bạn có phương thức lấy ID người tạo
+        this.updatedByUserId = currentUserId();  // Giả sử bạn có phương thức lấy ID người sửa
+    }
+
+    private Long currentUserId() {
+        // Phương thức giả định để lấy ID người dùng hiện tại
+        // Bạn cần thay thế bằng cách lấy ID người dùng thực tế
+        return 1L;  // Ví dụ, ID người dùng hiện tại là 1
+    }
 
     public Long getId() {
         return id;
@@ -40,19 +59,19 @@ public class PhongHoc {
         this.tenPhong = tenPhong;
     }
 
-    public String getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public String getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(String updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 

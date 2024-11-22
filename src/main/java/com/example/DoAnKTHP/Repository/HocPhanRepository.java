@@ -8,4 +8,5 @@ import com.example.DoAnKTHP.models.HocPhan;
 @Repository
 public interface HocPhanRepository extends JpaRepository<HocPhan, Long> {
     List<HocPhan> findByTenHocPhanContaining(String tenHocPhan);
+    
 }

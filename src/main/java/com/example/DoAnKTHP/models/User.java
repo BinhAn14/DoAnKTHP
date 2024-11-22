@@ -1,10 +1,14 @@
 package com.example.DoAnKTHP.models;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "User")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,6 +28,19 @@ public class User {
     @Column(name = "updated_at", length = 19)
     private String updatedAt;
 
+    @Column(name = "email", nullable = false, length = 100)  // Thêm thuộc tính email
+    private String email;  // Thuộc tính email
+
+    // Getter và Setter cho email
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    // Các getter và setter khác
     public Long getId() {
         return id;
     }
@@ -71,5 +88,11 @@ public class User {
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
     }
-
+    public User() {
+        // Thiết lập thời gian mặc định cho createdAt và updatedAt
+        String currentTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        this.createdAt = currentTime;
+        this.updatedAt = currentTime;
+    }
 }
+

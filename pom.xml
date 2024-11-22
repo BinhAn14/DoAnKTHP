@@ -27,8 +27,7 @@
 		<url/>
 	</scm>
 	<properties>
-		<maven.compiler.source>22</maven.compiler.source>
-    <maven.compiler.target>22</maven.compiler.target>
+		<java.version>23</java.version>
 		<spring-security.version>6.3.4</spring-security.version>
 	</properties>
 	<dependencies>

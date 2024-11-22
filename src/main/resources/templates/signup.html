@@ -124,6 +124,7 @@
 
         <!-- Right Panel (Sign Up Form) -->
         <div class="right-panel">
+            <h2>Create Account</h2>
             <form action="/signup" method="post">
                 <div class="input-group">
                     <input type="text" name="username" placeholder="Username" required>
@@ -134,11 +135,9 @@
                 <div class="input-group">
                     <input type="password" name="password" placeholder="Password" required>
                 </div>
-                <!-- Hiển thị thông báo lỗi/success -->
                 <p style="color: red;" th:text="${message}"></p>
                 <button type="submit">SIGN UP</button>
             </form>
-            
         </div>
     </div>
 </body>

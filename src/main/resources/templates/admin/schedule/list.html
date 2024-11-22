@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách thời khóa biểu</title>
+    <!-- Thêm Bootstrap từ CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <script>
+        // Hàm xác nhận xóa
+        function confirmDelete(event) {
+            event.preventDefault(); // Ngừng hành động mặc định của liên kết
+            if (confirm("Bạn chắc chắn muốn xóa dữ liệu này?")) {
+                // Nếu người dùng xác nhận, thực hiện xóa
+                window.location.href = event.target.getAttribute('href');
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Danh sách Thời Khóa Biểu</h1>
+
+    <!-- Nút thêm mới -->
+    <div class="mb-3 text-end">
+        <a href="#" th:href="@{/admin/schedule/add}" class="btn btn-primary">Thêm mới</a>
+    </div>
+
+    <!-- Bảng hiển thị thời khóa biểu -->
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Giảng Viên</th>
+                <th>Môn Học</th>
+                <th>Phòng Học</th>
+                <th>Ca</th>
+                <th>Thứ</th>
+                <th>Ngày</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="schedule : ${schedules}">
+                <td th:text="${schedule.giangVien.tenGiangVien}"></td>
+                <td th:text="${schedule.hocPhan.tenHocPhan}"></td>
+                <td th:text="${schedule.phong.tenPhong}"></td>
+                <td th:text="${schedule.ca}"></td>
+                <td th:text="${schedule.thu}"></td>
+                <td th:text="${schedule.ngay}"></td>
+                <td>
+                    <a th:href="@{/admin/schedule/edit/{id}(id=${schedule.id})}" class="btn btn-warning btn-sm">Sửa</a>
+                    
+                    <!-- Nút xóa với xác nhận -->
+                    <a href="#" th:href="@{/admin/schedule/delete/{id}(id=${schedule.id})}" class="btn btn-danger btn-sm" onclick="confirmDelete(event)">Xóa</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

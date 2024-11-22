@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface LichLopRepository extends JpaRepository<LichLop, Long> {
     List<LichLop> findByLop(String lop);
+    
 }

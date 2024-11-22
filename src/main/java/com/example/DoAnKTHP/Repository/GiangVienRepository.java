@@ -7,4 +7,5 @@ import com.example.DoAnKTHP.models.GiangVien;
 @Repository
 public interface GiangVienRepository extends JpaRepository<GiangVien, Long> {
     GiangVien findByTenGiangVien(String tenGiangVien);
+    
 }

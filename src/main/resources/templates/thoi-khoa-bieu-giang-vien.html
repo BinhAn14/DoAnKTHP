@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thời Khóa Biểu Giảng Viên</title>
+</head>
+<body>
+    <h1>Thời Khóa Biểu của Giảng Viên</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Thứ</th>
+                <th>Buổi</th>
+                <th>Ca</th>
+                <th>Phòng</th>
+                <th>Học phần</th>
+                <th>Lớp học tập</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="caHoc : ${giangVien}">
+                <td th:text="${caHoc.thu}">Thứ</td>
+                <td th:text="${caHoc.buoi}">Buổi</td>
+                <td th:text="${caHoc.ca}">Ca</td>
+                <td th:text="${caHoc.phong.tenPhong}">Phòng</td>
+                <td th:text="${caHoc.hocPhan.tenHocPhan}">Học phần</td>
+                <td th:text="${caHoc.lop.tenLopHoacTenLopGhep}">Lớp học tập</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

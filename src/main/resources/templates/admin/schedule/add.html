@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thêm Thời Khóa Biểu</title>
+    <!-- Link Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white text-center">
+            <h2>Thêm Thời Khóa Biểu</h2>
+        </div>
+        <div class="card-body">
+            <form th:action="@{/admin/schedule/add}" method="post" th:object="${schedule}">
+                <!-- Giảng Viên -->
+                <div class="mb-3">
+                    <label for="giangVien" class="form-label">Giảng Viên</label>
+                    <input type="text" id="giangVien" class="form-control" th:field="*{giangVien.tenGiangVien}" placeholder="Nhập tên giảng viên" />
+                </div>
+
+                <!-- Môn Học -->
+                <div class="mb-3">
+                    <label for="hocPhan" class="form-label">Học Phần</label>
+                    <input type="text" id="hocPhan" class="form-control" th:field="*{hocPhan.tenHocPhan}" placeholder="Nhập tên môn học" required />
+                </div>
+
+                <!-- Phòng Học -->
+                <div class="mb-3">
+                    <label for="phong" class="form-label">Phòng Học</label>
+                    <input type="text" id="phong" class="form-control" th:field="*{phong.tenPhong}" placeholder="Nhập tên phòng học" required />
+                </div>
+
+                <!-- Lớp Học -->
+                <div class="mb-3">
+                    <label for="lopHoc" class="form-label">Lớp Học</label>
+                    <input type="text" id="lopHoc" class="form-control" th:field="*{lopHoc.tenLop}" placeholder="Nhập tên lớp học" required />
+                </div>
+
+                <!-- Ca -->
+                <div class="mb-3">
+                    <label for="ca" class="form-label">Ca</label>
+                    <input type="number" id="ca" class="form-control" th:field="*{ca}" placeholder="Nhập số ca học" required />
+                </div>
+
+                <!-- Thứ -->
+                <div class="mb-3">
+                    <label for="thu" class="form-label">Thứ</label>
+                    <input type="number" id="thu" class="form-control" th:field="*{thu}" placeholder="Nhập thứ trong tuần" required />
+                </div>
+
+                <!-- Ngày -->
+                <div class="mb-3">
+                    <label for="ngay" class="form-label">Ngày</label>
+                    <input type="date" id="ngay" class="form-control" th:field="*{ngay}" required />
+                </div>
+
+                <!-- Nút lưu -->
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success btn-lg px-5">Lưu</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Link Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

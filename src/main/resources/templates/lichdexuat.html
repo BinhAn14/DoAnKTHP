@@ -2,28 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lịch Đề Xuất</title>
 </head>
 <body>
-    <h2>Lịch Đề Xuất Giảng Dạy</h2>
-
-    <table border="1">
-        <tr>
-            <th>Phòng</th>
-            <th>Thứ</th>
-            <th>Ca</th>
-            <th>Lớp</th>
-            <th>Giảng viên ID</th>
-        </tr>
-        <tr th:each="lich : ${danhSachLichDeXuat}">
-            <td th:text="${lich.phong}"></td>
-            <td th:text="${lich.thu}"></td>
-            <td th:text="${lich.ca}"></td>
-            <td th:text="${lich.tenLop}"></td>
-            <td th:text="${lich.giangVienId}"></td>
-        </tr>
+    <h1>Lịch Đề Xuất</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Phòng</th>
+                <th>Giảng viên</th>
+                <th>Ngày</th>
+                <th>Tiết</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="lich : ${danhSachLichDeXuat}">
+                <td th:text="${lich.phong}"></td>
+                <td th:text="${lich.giangVienId}"></td>
+                <td th:text="${lich.ngay}"></td>
+                <td th:text="${lich.ca}"></td>
+            </tr>
+        </tbody>
     </table>
-
-    <a href="/">Quay lại trang nhập</a>
 </body>
 </html>

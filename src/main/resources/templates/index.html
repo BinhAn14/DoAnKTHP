@@ -1,115 +1,44 @@
 <!DOCTYPE html>
-<html lang="vi">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đề Xuất Thời Khóa Biểu</title>
+    <title>Thời Khóa Biểu</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f4f4f4;
-        }
-
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-
         table {
-            width: 100%;
             border-collapse: collapse;
+            width: 100%;
             margin-top: 20px;
         }
 
-        th,
-        td {
-            padding: 10px;
+        th, td {
             border: 1px solid #ddd;
+            padding: 8px;
             text-align: center;
         }
 
         th {
-            background-color: #4CAF50;
-            color: white;
-        }
-
-        .no-data {
-            text-align: center;
-            margin-top: 20px;
-            color: #f00;
+            background-color: #f4f4f4;
         }
     </style>
 </head>
-
 <body>
+    <h1>Thời Khóa Biểu</h1>
+    <form method="GET" action="/lich/giangvien">
+        <label for="giangVienId">Nhập ID Giảng Viên:</label>
+        <input type="number" id="giangVienId" name="giangVienId" required>
+        <button type="submit">Xem Thời Khóa Biểu</button>
+    </form>
 
-    <h1>Đề Xuất Thời Khóa Biểu</h1>
-
-    <div id="lichDeXuatContainer"></div>
-
-    <script>
-        async function layLichDeXuat(lopid) {
-            try {
-                const response = await fetch(`/api/lich-de-xuat/${lopid}`);
-                if (!response.ok) throw new Error('Không tìm thấy dữ liệu');
-                const lichDeXuatList = await response.json();
-                return lichDeXuatList;
-            } catch (error) {
-                console.error(error);
-                return [];
-            }
-        }
-
-        // Hàm để hiển thị dữ liệu
-        function hienThiLichDeXuat(lichDeXuatList) {
-            const container = document.getElementById('lichDeXuatContainer');
-            container.innerHTML = ''; // Xóa nội dung cũ
-
-            if (lichDeXuatList.length === 0) {
-                container.innerHTML = '<div class="no-data">Không có lịch đề xuất nào!</div>';
-                return;
-            }
-
-            const table = document.createElement('table');
-            table.innerHTML = `
+    <table id="timetable">
+        <thead>
             <tr>
-                <th>Ngày</th>
+                <th>Thứ</th>
                 <th>Ca</th>
                 <th>Phòng</th>
-                <th>Giảng Viên</th>
-                <th>Lớp</th>
+                <th>Học phần</th>
+                <th>Lớp học tập</th>
             </tr>
-        `;
-
-            lichDeXuatList.forEach(item => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                <td>${item.ngay}</td>
-                <td>${item.ca}</td>
-                <td>${item.phong.join(', ')}</td>
-                <td>${item.giangVien}</td>
-                <td>${item.lop}</td>
-            `;
-                table.appendChild(row);
-            });
-
-            container.appendChild(table);
-        }
-
-        // Hàm khởi tạo
-        async function init() {
-            const lopid = 'lop1'; // Thay đổi giá trị này theo yêu cầu
-            const lichDeXuatList = await layLichDeXuat(lopid);
-            hienThiLichDeXuat(lichDeXuatList);
-        }
-
-        // Gọi hàm khởi tạo khi tải trang
-        window.onload = init;
-    </script>
-
+    </table>
 </body>
-
 </html>
