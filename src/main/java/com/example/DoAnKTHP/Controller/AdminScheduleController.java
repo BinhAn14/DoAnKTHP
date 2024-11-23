@@ -47,7 +47,8 @@ public class AdminScheduleController {
         return "redirect:/admin/schedule";
     }
 
-    @PostMapping("/edit/{id}")
+    // Cập nhật thời khóa biểu
+    @PutMapping("/edit/{id}")
     public String updateSchedule(@PathVariable Long id, @ModelAttribute LichGiangVien schedule) {
         Optional<LichGiangVien> existingSchedule = lichGiangVienService.getScheduleById(id);
         if (existingSchedule.isPresent()) {

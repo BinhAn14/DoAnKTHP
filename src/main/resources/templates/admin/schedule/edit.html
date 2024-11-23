@@ -9,7 +9,7 @@
     <div class="container mt-5">
         <h2 class="text-center mb-4">Chỉnh sửa lịch giảng viên</h2>
         <form th:action="@{/admin/schedule/edit/{id}(id=${schedule.id})}" th:object="${schedule}" method="post">
-            
+            <input type="hidden" name="_method" value="put" />
             <!-- Giảng viên -->
             <div class="mb-3">
                 <label for="giangVien" class="form-label">Giảng viên:</label>
