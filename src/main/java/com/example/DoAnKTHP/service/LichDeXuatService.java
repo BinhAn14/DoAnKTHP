@@ -17,36 +17,34 @@ import java.util.List;
 public class LichDeXuatService {
 
     @Autowired
-    private LichLopRepository lichLopRepository;
-
-    @Autowired
     private LichPhongMayRepository lichPhongMayRepository;
 
     @Autowired
     private LichGiangVienRepository lichGiangVienRepository;
 
-    public List<LichDeXuat> deXuatLich(String lop, Long giangVienId) {
+    // Phương thức đề xuất lịch
+    public List<LichDeXuat> deXuatLich(Long giangVienId) {
         List<LichDeXuat> danhSachDeXuat = new ArrayList<>();
 
-        List<LichLop> lichLopList = lichLopRepository.findByLop(lop);
-
+        // Lấy lịch giảng viên từ cơ sở dữ liệu
         List<LichGiangVien> lichGiangVienList = lichGiangVienRepository.findByGiangVienId(giangVienId);
-
+        
+        // Lấy danh sách phòng máy còn trống
         List<LichPhongMay> phongTrongList = lichPhongMayRepository.findPhongTrong();
+
+        // Kiểm tra các phòng, các ngày trong tuần và ca học
         for (LichPhongMay phongTrong : phongTrongList) {
-            for (int thu = 2; thu <= 7; thu++) {
-                for (int ca = 1; ca <= 5; ca++) {
-                    boolean lopRanh = kiemTraLopRanh(lichLopList, thu, ca);
+            for (int thu = 2; thu <= 7; thu++) {  // Thứ 2 đến thứ 7
+                for (int ca = 1; ca <= 5; ca++) {  // 5 ca học
                     boolean giangVienRanh = kiemTraGiangVienRanh(lichGiangVienList, thu, ca);
 
-                    if (lopRanh && giangVienRanh) {
-
+                    // Nếu giảng viên rảnh, thêm vào danh sách lịch đề xuất
+                    if (giangVienRanh) {
                         LichDeXuat lichDeXuat = new LichDeXuat(
                                 phongTrong.getPhong(),
                                 thu,
                                 ca,
-                                lop,
-                                giangVienId);
+                                null, giangVienId);
                         danhSachDeXuat.add(lichDeXuat);
                     }
                 }
@@ -56,21 +54,14 @@ public class LichDeXuatService {
         return danhSachDeXuat;
     }
 
-    private boolean kiemTraLopRanh(List<LichLop> lichLopList, int thu, int ca) {
-        for (LichLop lichLop : lichLopList) {
-            if (lichLop.getThu() == thu && lichLop.getCa() == ca) {
-                return false;
-            }
-        }
-        return true;
-    }
-
+    // Kiểm tra xem giảng viên có rảnh vào thời gian đã cho không
     private boolean kiemTraGiangVienRanh(List<LichGiangVien> lichGiangVienList, int thu, int ca) {
         for (LichGiangVien lichGiangVien : lichGiangVienList) {
             if (lichGiangVien.getThu() == thu && lichGiangVien.getCa() == ca) {
-                return false;
+                return false; // Giảng viên đã có lịch
             }
         }
-        return true;
+        return true; // Giảng viên không có lịch
     }
 }
+

@@ -12,23 +12,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
-@RequestMapping("/api/lichdexuat")
 public class LichDeXuatController {
 
     @Autowired
     private LichDeXuatService lichDeXuatService;
 
-    @GetMapping("/dexuat")
-    public String getLichDeXuat(@RequestParam String lop, @RequestParam Long giangVienId, Model model) {
-        List<LichDeXuat> danhSachLichDeXuat = lichDeXuatService.deXuatLich(lop, giangVienId);
+    @GetMapping("/lich-de-xuat")
+    public String hienThiLichDeXuat(@RequestParam(name = "giangVienId", required = false, defaultValue = "1") Long giangVienId, Model model) {
+        // Lấy danh sách lịch đề xuất
+        List<LichDeXuat> danhSachLichDeXuat = lichDeXuatService.deXuatLich(giangVienId);
         model.addAttribute("danhSachLichDeXuat", danhSachLichDeXuat);
-        return "lichdexuat";
-    }
-
-    @GetMapping("/timlichdexuat")
-    public String timLichDeXuat(@RequestParam String lop, @RequestParam Long giangVienId, Model model) {
-        List<LichDeXuat> danhSachLichDeXuat = lichDeXuatService.deXuatLich(lop, giangVienId);
-        model.addAttribute("danhSachLichDeXuat", danhSachLichDeXuat);
-        return "timlichdexuat";
+        return "lich-de-xuat"; // Tên của template HTML (lich-de-xuat.html)
     }
 }
